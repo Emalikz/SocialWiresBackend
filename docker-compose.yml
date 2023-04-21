@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   socialwiresbackend:
-    image: node
+    build: .
     volumes:
       - ./.:/app/
     container_name: socialwiresbackend_server
@@ -10,11 +10,11 @@ services:
       - 3000:3000
     depends_on: 
       - psgql
-    command: node /app/dist/main.js
   psgql:
-    image: postgres
+    image: postgres:15.1-alpine
     environment:
-        POSTGRES_DB: socialwiresbackend
+        POSTGRES_DB: socialwiresbackend_db
+        POSTGRES_USER: emanuel
         POSTGRES_PASSWORD: emanuel
     container_name: socialwiresbackend_db
     restart: always

@@ -16,7 +16,7 @@ export class MessagesService {
                     id: author
                 }
             },
-            relations:['author']
+            relations:['author', 'comments','comments.author', 'reactions', 'reactions.author']
         })
     }
 
@@ -28,7 +28,7 @@ export class MessagesService {
                     id: author
                 }
             },
-            relations:['author']
+            relations:['author', 'comments', 'reactions']
         })
     }
 
