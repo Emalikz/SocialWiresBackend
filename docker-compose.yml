@@ -1,0 +1,24 @@
+version: '3.0'
+services:
+  socialwiresbackend:
+    image: node
+    volumes:
+      - ./.:/app/
+    container_name: socialwiresbackend_server
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on: 
+      - psgql
+    command: node /app/dist/main.js
+  psgql:
+    image: postgres
+    environment:
+        POSTGRES_DB: socialwiresbackend
+        POSTGRES_PASSWORD: emanuel
+    container_name: socialwiresbackend_db
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres.sql:/docker-entrypoint-initdb.d/postgres.sql
