@@ -17,7 +17,7 @@ import { jwtConstants } from './constants';
   ],
   controllers: [AuthController],
   providers: [UserService],
-  exports:[UserService]
+  exports:[UserService],
 })
 export class AuthModule {}
  

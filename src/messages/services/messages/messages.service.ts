@@ -9,6 +9,11 @@ export class MessagesService {
     @InjectRepository(Message)
     private readonly repository: Repository<Message>;
 
+    /**
+     * Get all the messages by author
+     * @param author 
+     * @returns 
+     */
     getAll(author):Promise<Message[]>{
         return this.repository.find({
             where: {
@@ -20,6 +25,12 @@ export class MessagesService {
         })
     }
 
+    /**
+     * Get message by id and author
+     * @param author 
+     * @param message_id 
+     * @returns 
+     */
     getById(author, message_id):Promise<Message>{
         return this.repository.findOne({
             where: {
@@ -32,6 +43,12 @@ export class MessagesService {
         })
     }
 
+    /**
+     * Delete message if the request user is owner of them
+     * @param author 
+     * @param message_id 
+     * @returns 
+     */
     async delete(author, message_id):Promise<DeleteResult>{
         //Validamos de que el mensaje pertenezca al usuario actual
         const message = await this.repository.findOne({
@@ -45,9 +62,15 @@ export class MessagesService {
         if(message){
             return this.repository.delete({id:message_id});
         }
-        throw new Error("No se puede eliminar un mensaje que no es propio o que no existe");
+        throw new Error("Cannot delete a message that is not owned or does not exist");
     }
 
+    /**
+     * Register message in database
+     * @param body 
+     * @param user 
+     * @returns 
+     */
     public async createMessage(body: MessageCreateDto, user:string): Promise<Message> {
         const message: Message = new Message();
         message.title = body.title;

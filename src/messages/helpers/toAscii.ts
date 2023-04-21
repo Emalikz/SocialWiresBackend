@@ -1,7 +1,11 @@
 /* import emojiRegex from 'emoji-regex'; */
 const emojiRegex = require('emoji-regex');
 
-
+/**
+ * Convert emojis in text to ascii code
+ * @param message 
+ * @returns 
+ */
 export const emojiToAsciiAsync = (message): Promise<string> => {
     return new Promise((res, rej) => {
         if (typeof message != 'string') {
@@ -10,13 +14,13 @@ export const emojiToAsciiAsync = (message): Promise<string> => {
 
         const REGEX = emojiRegex();
 
-        var newMessage = message.match(REGEX);
-        for (var emoji in newMessage) {
-            var emoji_message = newMessage[emoji];
-            var index = message.indexOf(emoji_message);
+        let newMessage = message.match(REGEX);
+        for (let emoji in newMessage) {
+            let emoji_message = newMessage[emoji];
+            let index = message.indexOf(emoji_message);
             if (index === -1)
                 continue;
-            emoji_message = "\\u" + emoji_message.charCodeAt(0).toString(16) + "\\u" + emoji_message.charCodeAt(1).toString(16);
+            emoji_message = `U+${emoji_message.codePointAt(0)}`;
             message = message.substr(0, index) + emoji_message + message.substr(index + 2);
         }
 

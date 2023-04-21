@@ -10,7 +10,13 @@ export class ReactionsService {
     @InjectRepository(Reaction)
     private readonly repository: Repository<Reaction>;
 
-
+    /**
+     * Add reaction to message
+     * @param reaction_dto 
+     * @param {number} author_id author of comment
+     * @param {number} message_id message to comment
+     * @returns 
+     */
     async reaction(reaction_dto:ReactionCreateDto, author_id:number, message_id:number){
         const reaction = new Reaction();
         reaction.author_id = author_id;

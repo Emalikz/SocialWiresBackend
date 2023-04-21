@@ -7,9 +7,10 @@ import { CommentsService } from './services/comments/comments.service';
 import { Comment } from './entities/comment.entity';
 import { ReactionsService } from './services/reactions/reactions.service';
 import { Reaction } from './entities/Reaction.entity';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Message, Comment, Reaction]),],
+  imports:[TypeOrmModule.forFeature([Message, Comment, Reaction]),AuthModule],
   controllers: [MessagesController],
   providers: [MessagesService, CommentsService, ReactionsService]
 })

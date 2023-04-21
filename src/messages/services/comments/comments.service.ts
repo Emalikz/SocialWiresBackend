@@ -9,6 +9,13 @@ export class CommentsService {
     @InjectRepository(Comment)
     private readonly repository: Repository<Comment>;
     
+    /**
+     * Comment a message
+     * @param {CommentCreateDto} comment_dto 
+     * @param {number} author author of comment
+     * @param message_id message to comment
+     * @returns 
+     */
     commentMessage(comment_dto:CommentCreateDto, author:number, message_id: number):Promise<Comment>{
         const comment = new Comment();
         comment.author_id = author;

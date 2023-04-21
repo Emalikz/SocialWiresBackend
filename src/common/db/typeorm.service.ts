@@ -7,6 +7,10 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   @Inject(ConfigService)
   private readonly config: ConfigService;
 
+  /**
+   * Database definition config
+   * @returns {object}
+   */
   public createTypeOrmOptions(): TypeOrmModuleOptions {
     console.log(this.config.get("POSTGRES_NAME"))
     return {
