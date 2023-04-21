@@ -1,6 +1,7 @@
+import { Reaction } from 'src/messages/entities/Reaction.entity';
 import { Comment } from 'src/messages/entities/comment.entity';
 import { Message } from 'src/messages/entities/message.entity';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Users {
@@ -27,4 +28,7 @@ export class Users {
 
   @OneToMany(type=> Message, (message)=>message.author)
     messages: Message[]
+
+  @OneToMany(type=> Reaction, (Reaction)=>Reaction.author)
+    reactions: Reaction[]
 }

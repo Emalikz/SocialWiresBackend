@@ -1,9 +1,9 @@
 import { Controller, UseGuards, Get, Post, Request, Body, Param, Delete, Patch, Response} from '@nestjs/common';
 import { AuthGuard } from 'src/auth/guards/jwt.guard';
-import { MessagesService } from './services/messages.service';
+import { MessagesService } from './services/messages/messages.service'; 
 import { MessageCreateDto } from './dto/Message';
 import { CommentCreateDto } from './dto/Comment';
-import { CommentsService } from './services/comments.service';
+import { CommentsService } from './services/comments/comments.service'; 
 
 @Controller('messages')
 @UseGuards(AuthGuard)
@@ -40,14 +40,11 @@ export class MessagesController {
         const author = req.user.sub;
         const message = await this.messageService.getById(author, message_id);
         if(!message){
-
-            console.log("Prueba")
             return resp.json({error: true, status: 'You cannot comment your own posts'}).status(401);
         }
-        this.commentService.commentMessage(comment, author , message_id);
-        const response =await this.messageService.getById(author,message_id);
-        console.log(response);
-        return resp.json(response).status(200);
+        let result = await this.commentService.commentMessage(comment, author , message_id);
+        message.comments.push(result);
+        return resp.json(message).status(200);
     }
 
 }

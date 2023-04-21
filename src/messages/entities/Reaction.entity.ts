@@ -3,12 +3,12 @@ import { Message } from './message.entity';
 import { Users } from 'src/auth/entities/User.entity';
 
 @Entity()
-export class Comment {
+export class Reaction {
     @PrimaryGeneratedColumn('increment')
     public id!: number;
 
     @Column({ type: 'text' })
-    comment
+    reaction
 
     @ManyToOne(type=>Message, (message)=>message.comments) @JoinColumn()
     message
