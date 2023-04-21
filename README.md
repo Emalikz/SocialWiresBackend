@@ -41,4 +41,4 @@ If you have all requirements you have to run `docker-compose up --build` if you 
 The postman collection is setting up to automatize the authentication process and passing to each endpoint. You only have to login and use the others endpoints.
 
 ### Additional
-I create a short functionality to see the reaction ratio of each user on their own messages.
+I create a short functionality to see the reaction ratio of each user on their own messages. This is in order to have an idea of ​​the acceptance that a user has
